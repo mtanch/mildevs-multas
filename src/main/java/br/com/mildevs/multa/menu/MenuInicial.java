@@ -1,5 +1,6 @@
 package br.com.mildevs.multa.menu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuInicial {
@@ -20,9 +21,13 @@ public class MenuInicial {
 		System.out.println("|--------- [5] FINALIZAR PROGRAMA ------------------------|");
 		System.out.println("+---------------------------------------------------------+");
 		System.out.print  ("	=> ");
-		int escolha = entrada.nextInt();
 		
-		return escolha;
+		try {
+			int escolha = entrada.nextInt();
+			return escolha;
+		} catch(InputMismatchException e) {
+			return 6;	//	Retorna ao Menu Inicial
+		}
 	}
 
 	public static void finalizaPrograma() {
@@ -37,5 +42,13 @@ public class MenuInicial {
 		System.err.println("|--------------- ESCOLHA UMA OPÇÃO VÁLIDA! ---------------|");
 		System.err.println("+---------------------------------------------------------+");
 	}
+	
+	public static void mensagemDadoInformadoInvalido() {
+		System.err.println("+---------------------------------------------------------+");
+		System.err.println("|------------- INFORME APENAS DADOS VÁLIDOS! -------------|");
+		System.err.println("+---------------------------------------------------------+");
+	}
+	
+	
 	
 }

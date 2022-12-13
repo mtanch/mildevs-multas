@@ -2,7 +2,6 @@ package br.com.mildevs.multa.dao;
 
 import java.util.List;
 
-import br.com.mildevs.multa.entity.Condutor;
 import br.com.mildevs.multa.entity.Multa;
 import br.com.mildevs.multa.entity.Veiculo;
 import jakarta.persistence.EntityManager;
@@ -42,13 +41,6 @@ public class VeiculoDao {
 			return true;
 		}
 		return false;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Veiculo> consultarVeiculo(String placa) {
-		Query query = this.manager.createQuery("SELECT v FROM Veiculo as v WHERE v.placa = :placa");
-		query.setParameter("placa", placa);
-		return query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -84,13 +84,13 @@ public class Veiculo {
 	
 	@Override
 	public String toString() {
-		return "\n[Veículo]:"
-					+ "\n	Placa = " + placa
-					+ "\n	Ano = " + ano
-					+ "\n	Modelo = " + modelo
-					+ "\n	Marca = " + marca
-					+ "\n	Multas = " + multas
-					+ "\n	CNH Condutor = " + condutor.getNroCnh() + "\n";
+		return	  "\n		[Veículo]:"
+				+ "\n		Placa = " + placa
+				+ "\n		Ano = " + ano
+				+ "\n		Modelo = " + modelo
+				+ "\n		Marca = " + marca
+				+ "\n		CNH Condutor = " + condutor.getNroCnh()
+				+ "\n		Multas = " + multas + "\n";
 	}
 	
 }

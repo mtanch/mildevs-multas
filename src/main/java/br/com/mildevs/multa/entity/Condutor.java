@@ -73,12 +73,13 @@ public class Condutor {
 	
 	@Override
 	public String toString() {
-		return "\n[Condutor]: "
-				+ "\n	CNH:" + nroCnh
-				+ "\n	Data de Emissão: " + dataEmissao
-				+ "\n	Orgão Emissor: " + orgaoEmissor
-				+ "\n	Pontuação: " + pontuacaoCnh
-				+ "\n 	Veículos: " + veiculo + "\n";
+		
+		return    "\n	[Condutor]: "
+				+ "\n	CNH:" + this.nroCnh
+				+ "\n	Data de Emissão: " + this.dataEmissao
+				+ "\n	Orgão Emissor: " + this.orgaoEmissor
+				+ "\n	Pontuação: " + this.pontuacaoCnh
+				+ "\n 	Veículos: " + this.getVeiculo() + "\n";
 	}
 }
 

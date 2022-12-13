@@ -43,10 +43,12 @@ public class CondutorDao {
 		return false;
 	}
 	
-	public int consultarCondutor(int nro_cnh) {
-		Query query = this.manager.createQuery("SELECT c FROM Condutor as c WHERE c.nro_cnh = :nro_cnh");
-		query.setParameter("nro_cnh", nro_cnh);
-		return query.getFirstResult();
+	public void consultarCondutor(long nro_cnh) {
+//		Query query = this.manager.createQuery("SELECT c FROM Condutor as c WHERE c.nro_cnh = :nro_cnh");
+//		query.setParameter("nro_cnh", nro_cnh);
+//		return query.getFirstResult();
+		Condutor condutor = this.manager.find(Condutor.class, nro_cnh);
+		System.out.println(condutor);
 	}
 	
 	@SuppressWarnings("unchecked")

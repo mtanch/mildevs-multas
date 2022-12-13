@@ -2,6 +2,8 @@ package br.com.mildevs.multa.menu;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import br.com.mildevs.multa.dao.CondutorDao;
@@ -23,102 +25,113 @@ public class MenuCadastro {
 			System.out.println("|--------- [4] VOLTAR AO MENU ----------------------------|");
 			System.out.println("+---------------------------------------------------------+");
 			System.out.print  ("	=> ");
-			int escolha = entrada.nextInt();
-			
-			return escolha;
+			try {
+				int escolha = entrada.nextInt();
+				return escolha;
+			} catch(InputMismatchException e) {
+				return 5;	//	Retorna ao Menu Inicial
+			}
 	}
 //	long nroCnh, LocalDate dataEmissao, String orgaoEmissor, int pontuacaoCnh
 	public static void insereCondutor(Scanner entrada) {
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------------------ CADASTRAR CONDUTOR: ------------------|");
-		System.out.println("+---------------------------------------------------------+\n");
-		
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|--------------------- NÚMERO DA CNH ---------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		long nroCnh = entrada.nextLong();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------------- DATA DE EMISSÃO --------------------|");
-		System.out.println("|---------------------+-------------+---------------------|");
-		System.out.println("|---------------------| Dia/Mês/Ano |---------------------|");
-		System.out.println("+---------------------+-------------+---------------------+");
-		System.out.print  ("	=> ");
-		entrada.nextLine();
-		String stringData = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|--------------------- ORGÃO EMISSOR ---------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		String orgaoEmissor = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|--------------------- PONTUAÇÃO CNH ---------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		int pontuacaoCnh = entrada.nextInt();
-		
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate data = LocalDate.parse(stringData, format);
-		
-//		System.out.println("+---------------------------------------------------------+");
-//		System.out.println("|------------------- INSERIDO CONDUTOR -------------------|");
-//		System.out.println("+---------------------------------------------------------+");
-		
-		Condutor condutor = new Condutor(nroCnh, data, orgaoEmissor, pontuacaoCnh);							//	TESTAR
-		CondutorDao condutorDao = new CondutorDao();														//	TESTAR
-		condutorDao.insereCondutor(condutor);																//	TESTAR
-		
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------ DESEJA CADASTRAR UM VEÍCULO PARA O CONDUTOR? -----|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|------- [1] SIM -----------------------------------------|");
-		System.out.println("|------- [2] NÃO -----------------------------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		
-		int escolha = entrada.nextInt();
-		
-		switch (escolha) {
-		
-		case 1:
-//			System.out.println("+---------------------------------------------------------+");
-//			System.out.println("|-------------------- INSERE VEÍCULO ---------------------|");
-//			System.out.println("+---------------------------------------------------------+");
-			insereVeiculo(entrada);
+		try {
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------------------ CADASTRAR CONDUTOR: ------------------|");
+			System.out.println("+---------------------------------------------------------+\n");
 			
-			do {
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|--------------------- NÚMERO DA CNH ---------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			long nroCnh = entrada.nextLong();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------------- DATA DE EMISSÃO --------------------|");
+			System.out.println("|---------------------+-------------+---------------------|");
+			System.out.println("|---------------------| Dia/Mês/Ano |---------------------|");
+			System.out.println("+---------------------+-------------+---------------------+");
+			System.out.print  ("	=> ");
+			entrada.nextLine();
+			String stringData = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|--------------------- ORGÃO EMISSOR ---------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			String orgaoEmissor = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|--------------------- PONTUAÇÃO CNH ---------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			int pontuacaoCnh = entrada.nextInt();
+			
+			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate data = LocalDate.parse(stringData, format);
+			
+//			System.out.println("+---------------------------------------------------------+");
+//			System.out.println("|------------------- CONDUTOR INSERIDO -------------------|");
+//			System.out.println("+---------------------------------------------------------+");
+			
+			Condutor condutor = new Condutor(nroCnh, data, orgaoEmissor, pontuacaoCnh);							//	TESTAR
+			CondutorDao condutorDao = new CondutorDao();														//	TESTAR
+			condutorDao.insereCondutor(condutor);																//	TESTAR
+			
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------ DESEJA CADASTRAR UM VEÍCULO PARA O CONDUTOR? -----|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|------- [1] SIM -----------------------------------------|");
+			System.out.println("|------- [2] NÃO -----------------------------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			int escolha = entrada.nextInt();
+			
+			switch (escolha) {
+			
+			case 1:
+	//			System.out.println("+---------------------------------------------------------+");
+	//			System.out.println("|-------------------- VEÍCULO INSERIDO -------------------|");
+	//			System.out.println("+---------------------------------------------------------+");
+				insereVeiculo(entrada);
 				
-				System.out.println("+---------------------------------------------------------+");
-				System.out.println("|----------- DESEJA CADASTRAR MAIS UM VEÍCULO? -----------|");
-				System.out.println("|---------------------------------------------------------|");
-				System.out.println("|------- [1] SIM -----------------------------------------|");
-				System.out.println("|------- [2] NÃO -----------------------------------------|");
-				System.out.println("+---------------------------------------------------------+");
-				System.out.print  ("	=> ");
-				escolha = entrada.nextInt();
-			
-				switch (escolha) {
-				case 1:
-//					System.out.println("+---------------------------------------------------------+");
-//					System.out.println("|-------------------- INSERE VEÍCULO ---------------------|");
-//					System.out.println("+---------------------------------------------------------+");
-					insereVeiculo(entrada);
-					break;
-				default:
-					break;
-				}
-			} while (escolha == 1);
-			
-			break;
-		default:
-			break;
+				do {
+					
+					System.out.println("+---------------------------------------------------------+");
+					System.out.println("|----------- DESEJA CADASTRAR MAIS UM VEÍCULO? -----------|");
+					System.out.println("|---------------------------------------------------------|");
+					System.out.println("|------- [1] SIM -----------------------------------------|");
+					System.out.println("|------- [2] NÃO -----------------------------------------|");
+					System.out.println("+---------------------------------------------------------+");
+					System.out.print  ("	=> ");
+					escolha = entrada.nextInt();
+					
+					switch (escolha) {
+					case 1:
+	//					System.out.println("+---------------------------------------------------------+");
+	//					System.out.println("|-------------------- VEÍCULO INSERIDO -------------------|");
+	//					System.out.println("+---------------------------------------------------------+");
+						insereVeiculo(entrada);
+						break;
+					default:
+						break;
+					}
+				} while (escolha == 1);
+				
+				break;
+			default:
+				MenuInicial.mensagemOpcaoInvalida();
+				break;
+			}
+		} catch (InputMismatchException e) {
+			MenuInicial.mensagemDadoInformadoInvalido();
+			entrada.nextLine();	//	Buffering
+		} catch (DateTimeParseException e) {
+			MenuInicial.mensagemDadoInformadoInvalido();
 		}
 	}
 	
 //	String placa, int ano, String marca, String modelo, Condutor condutor
 	public static void insereVeiculo(Scanner entrada) {
+		try {
 		System.out.println("+---------------------------------------------------------+");
 		System.out.println("|----------------- CADASTRO DE VEÍCULOS: -----------------|");
 		System.out.println("|---------------------------------------------------------|");
@@ -159,6 +172,10 @@ public class MenuCadastro {
 		
 		VeiculoDao veiculoDao = new VeiculoDao();																//TESTAR
 		veiculoDao.insereVeiculo(veiculo);																		//TESTAR
+		} catch (InputMismatchException e) {
+			MenuInicial.mensagemDadoInformadoInvalido();
+			entrada.nextLine();
+		}
 	}
 //	String codigoMulta, float valor, int pontuacao, Veiculo veiculo
 	public static void insereMulta(Scanner entrada) {

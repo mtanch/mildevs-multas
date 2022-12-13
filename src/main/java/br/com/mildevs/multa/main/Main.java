@@ -13,13 +13,13 @@ public class Main {
 		
 		
 		while (true) {
-			
-			switch (MenuInicial.menu()) {
+			//	Menu Incial
+			switch (MenuInicial.menu()) {	//	InputMismatchException tratada;
 			case 1:
-				
-				switch (MenuCadastro.menuCadastro(entrada)) {
+				//	Menu Cadastro
+				switch (MenuCadastro.menuCadastro(entrada)) {	//	InputMismatchException tratada;
 				case 1:
-					MenuCadastro.insereCondutor(entrada);
+					MenuCadastro.insereCondutor(entrada);	//	Exceptions tratadas;
 					break;
 				case 2:
 					MenuCadastro.insereVeiculo(entrada);
@@ -30,6 +30,11 @@ public class Main {
 				case 4:
 					//Retorna ao menu inicial;
 					break;
+				case 5:
+					//	case 5 é o Retorno da exception
+					MenuInicial.mensagemOpcaoInvalida();
+					entrada.nextLine();	//	Buffering
+					break;
 				default:
 					MenuInicial.mensagemOpcaoInvalida();
 					break;
@@ -37,11 +42,12 @@ public class Main {
 				
 				break;
 			case 2:
+				//	Menu Remoção
 	//			Menu.menuRemocao();
 				break;
 			case 3:
-				
-				switch (MenuConsulta.menuConsulta(entrada)) {
+				//	Menu Consulta
+				switch (MenuConsulta.menuConsulta(entrada)) {	
 				case 1:
 					//Consultar Condutor
 					
@@ -50,7 +56,7 @@ public class Main {
 						MenuConsulta.consultaCondutorPorCnh(entrada);
 						break;
 					case 2:
-						
+						MenuConsulta.listarTodosOsCondutores();
 						break;
 					default:
 						MenuInicial.mensagemOpcaoInvalida();
@@ -60,6 +66,19 @@ public class Main {
 					break;
 				case 2:
 					//Consultar Veiculo
+					
+					switch (MenuConsulta.submenuConsultaVeiculo(entrada)) {
+					case 1:
+						MenuConsulta.consultaVeiculoPorPlaca(entrada);
+						break;
+					case 2:
+						MenuConsulta.listarTodosOsVeiculos();
+						break;
+
+					default:
+						MenuInicial.mensagemOpcaoInvalida();
+						break;
+					}
 					break;
 				case 3:
 					//Consultar Multa
@@ -67,7 +86,11 @@ public class Main {
 				case 4:
 					//Retorna ao menu inicial;
 					break;
-
+				case 5:
+//					case 5 é o Retorno da exception
+					MenuInicial.mensagemOpcaoInvalida();
+					entrada.nextLine();	//	Buffering
+					break;
 				default:
 					break;
 				}
@@ -77,6 +100,10 @@ public class Main {
 				break;
 			case 5:
 				MenuInicial.finalizaPrograma();
+			case 6:
+				//	[CASE 6] É O RETORNO DA TRATATIVA DE EXCEPTION PARA O [MENU INICIAL]
+				MenuInicial.mensagemOpcaoInvalida();
+				break;
 			default:
 				MenuInicial.mensagemOpcaoInvalida();
 				break;
