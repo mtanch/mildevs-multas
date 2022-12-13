@@ -1,3 +1,3 @@
 ## mildevs-multas
 # Sistema de multas.
-É cadastra Condutores, Veículos e Multas em um banco de dados.
+Cadastra Condutores, Veículos e Multas em suas respectivas tabelas num banco de dados e se relacionando através de Chaves Estrangeiras.
