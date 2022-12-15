@@ -17,7 +17,7 @@ public class MenuInicial {
 		System.out.println("|--------- [1] CADASTRAR ---------------------------------|");
 		System.out.println("|--------- [2] REMOVER -----------------------------------|");
 		System.out.println("|--------- [3] CONSULTAR ---------------------------------|");
-		System.out.println("|--------- [4] EDITAR REGISTRO ---------------------------|");
+		System.out.println("|--------- [4] EDITAR DADOS ------------------------------|");
 		System.out.println("|--------- [5] FINALIZAR PROGRAMA ------------------------|");
 		System.out.println("+---------------------------------------------------------+");
 		System.out.print  ("	=> ");
@@ -46,6 +46,12 @@ public class MenuInicial {
 	public static void mensagemDadoInformadoInvalido() {
 		System.err.println("+---------------------------------------------------------+");
 		System.err.println("|------------- INFORME APENAS DADOS VÁLIDOS! -------------|");
+		System.err.println("+---------------------------------------------------------+");
+	}
+	
+	public static void mensagemDadoInformadoDuplicado() {
+		System.err.println("+---------------------------------------------------------+");
+		System.err.println("|---- OS DADOS INFORMADOS JÁ EXITEM NO BANCO DE DADOS ----|");
 		System.err.println("+---------------------------------------------------------+");
 	}
 	

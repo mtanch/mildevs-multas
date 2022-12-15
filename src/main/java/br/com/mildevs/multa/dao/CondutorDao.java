@@ -1,5 +1,6 @@
 package br.com.mildevs.multa.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.mildevs.multa.entity.Condutor;
@@ -18,36 +19,69 @@ public class CondutorDao {
 		this.manager = entityManagerFactory.createEntityManager();
 	}
 	
-	public boolean insereCondutor(Condutor condutor) {
+	public boolean cadastraCondutor(Condutor condutor) {
 		this.manager.getTransaction().begin();
 		this.manager.persist(condutor);
 		this.manager.getTransaction().commit();
-		System.out.println("\n+---------------------------------------------------------+");
+		System.out.println("+---------------------------------------------------------+");
 		System.out.println("|----------------- [CONDUTOR CADASTRADO] -----------------|");
-		System.out.println("+---------------------------------------------------------+\n");
+		System.out.println("+---------------------------------------------------------+");
 		return true;
 	}
 	
-	public boolean removeCondutor(long nro_cnh) {
-		Condutor condutor = this.manager.find(Condutor.class, nro_cnh);
+	public boolean removeCondutor(long nroCnh) {
+		Condutor condutor = this.manager.find(Condutor.class, nroCnh);
 		
 		if (condutor != null) {
 			this.manager.getTransaction().begin();
-			this.manager.remove(nro_cnh);
+			this.manager.remove(condutor);
 			this.manager.getTransaction().commit();
-			System.out.println("\n+---------------------------------------------------------+");
+			System.out.println("+---------------------------------------------------------+");
 			System.out.println("|------------------ [CONDUTOR REMOVIDO] ------------------|");
-			System.out.println("+---------------------------------------------------------+\n");
+			System.out.println("+---------------------------------------------------------+");
 			return true;
 		}
+		
+		System.err.println("+---------------------------------------------------------+");
+		System.err.println("|--------------- [CONDUTOR NÃO ENCONTRADO] ---------------|");
+		System.err.println("+---------------------------------------------------------+");
+		
 		return false;
 	}
 	
-	public void consultarCondutor(long nro_cnh) {
-//		Query query = this.manager.createQuery("SELECT c FROM Condutor as c WHERE c.nro_cnh = :nro_cnh");
-//		query.setParameter("nro_cnh", nro_cnh);
-//		return query.getFirstResult();
-		Condutor condutor = this.manager.find(Condutor.class, nro_cnh);
+	public void editaCnh(long nroCnh, long novaCnh) {
+		Condutor condutor = this.manager.find(Condutor.class, nroCnh);
+		condutor.setNroCnh(novaCnh);
+		
+		this.manager.getTransaction().begin();
+		this.manager.persist(condutor);
+		this.manager.getTransaction().commit();
+	}
+	
+	public void editaDataEmissaoCnh(long nroCnh, LocalDate novaData) {
+		Condutor condutor = this.manager.find(Condutor.class, novaData);
+		
+		condutor.setDataEmissao(novaData);
+		
+		this.manager.getTransaction().begin();
+		this.manager.persist(condutor);
+		this.manager.getTransaction().commit();
+	}
+	
+	public void editaOrgaoEmissor(long nroCnh, String novoOrgaoEmissor) {
+		
+		Condutor condutor = this.manager.find(Condutor.class, novoOrgaoEmissor);
+		
+		condutor.setOrgaoEmissor(novoOrgaoEmissor);
+		
+		this.manager.getTransaction().begin();
+		this.manager.persist(condutor);
+		this.manager.getTransaction().commit();
+		
+	}
+	
+	public void consultarCondutor(long nroCnh) {
+		Condutor condutor = this.manager.find(Condutor.class, nroCnh);
 		System.out.println(condutor);
 	}
 	
@@ -58,38 +92,12 @@ public class CondutorDao {
 		return query.getResultList();
 	}
 	
-	public int nroVeiculos(int cnh) {
-		Query query = this.manager.createQuery("SELECT COUNT(c.veiculo) FROM Condutor as c WHERE c.nro_cnh = :cnh");
-		query.setParameter("cnh", cnh);
-		
-		return query.getFirstResult();
-	}
-	
-	public boolean vendaVeiculo(int cnhVendedor, int cnhComprador, String placa) {
-		
-//		Veiculo veiculo = this.manager.find(Veiculo.class, placa);
-		
-		int qtdCarrosDoVendedor = nroVeiculos(cnhVendedor);
-		
-		if (qtdCarrosDoVendedor > 0) {
-			
-			Query query = this.manager.createQuery("UPDATE v FROM Veiculo AS v SET v.condutor = :comprador WHERE v.condutor = :vendedor "
-												+  "AND v.placa = :placa");
-			query.setParameter("comprador", cnhComprador);
-			query.setParameter("vendedor", cnhVendedor);
-			query.setParameter("placa", placa);
-			
-			return true;
+	public Condutor retornaCondutor(long nroCnh) {
+		Condutor condutor = this.manager.find(Condutor.class, nroCnh);
+		if (condutor != null) {
+			return condutor;
 		}
-		System.out.println("O vendedor não possui carro.");
-		return false;
+		return null;
 	}
-	
-
-	public Condutor retornaCondutor(long cnhCondutor) {
-		Condutor condutor = this.manager.find(Condutor.class, cnhCondutor);
-		return condutor;
-	}
-	
 	
 }

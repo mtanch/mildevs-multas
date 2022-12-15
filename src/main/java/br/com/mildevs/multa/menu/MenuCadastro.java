@@ -32,8 +32,8 @@ public class MenuCadastro {
 				return 5;	//	Retorna ao Menu Inicial
 			}
 	}
-//	long nroCnh, LocalDate dataEmissao, String orgaoEmissor, int pontuacaoCnh
-	public static void insereCondutor(Scanner entrada) {
+
+	public static void cadastraCondutor(Scanner entrada) {
 		try {
 			System.out.println("+---------------------------------------------------------+");
 			System.out.println("|------------------ CADASTRAR CONDUTOR: ------------------|");
@@ -68,13 +68,9 @@ public class MenuCadastro {
 			DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate data = LocalDate.parse(stringData, format);
 			
-//			System.out.println("+---------------------------------------------------------+");
-//			System.out.println("|------------------- CONDUTOR INSERIDO -------------------|");
-//			System.out.println("+---------------------------------------------------------+");
-			
-			Condutor condutor = new Condutor(nroCnh, data, orgaoEmissor, pontuacaoCnh);							//	TESTAR
-			CondutorDao condutorDao = new CondutorDao();														//	TESTAR
-			condutorDao.insereCondutor(condutor);																//	TESTAR
+			Condutor condutor = new Condutor(nroCnh, data, orgaoEmissor, pontuacaoCnh);
+			CondutorDao condutorDao = new CondutorDao();
+			condutorDao.cadastraCondutor(condutor);
 			
 			System.out.println("+---------------------------------------------------------+");
 			System.out.println("|------ DESEJA CADASTRAR UM VEÍCULO PARA O CONDUTOR? -----|");
@@ -88,10 +84,7 @@ public class MenuCadastro {
 			switch (escolha) {
 			
 			case 1:
-	//			System.out.println("+---------------------------------------------------------+");
-	//			System.out.println("|-------------------- VEÍCULO INSERIDO -------------------|");
-	//			System.out.println("+---------------------------------------------------------+");
-				insereVeiculo(entrada);
+				cadastraVeiculo(entrada);
 				
 				do {
 					
@@ -106,10 +99,7 @@ public class MenuCadastro {
 					
 					switch (escolha) {
 					case 1:
-	//					System.out.println("+---------------------------------------------------------+");
-	//					System.out.println("|-------------------- VEÍCULO INSERIDO -------------------|");
-	//					System.out.println("+---------------------------------------------------------+");
-						insereVeiculo(entrada);
+						cadastraVeiculo(entrada);
 						break;
 					default:
 						break;
@@ -129,91 +119,123 @@ public class MenuCadastro {
 		}
 	}
 	
-//	String placa, int ano, String marca, String modelo, Condutor condutor
-	public static void insereVeiculo(Scanner entrada) {
+	public static void cadastraVeiculo(Scanner entrada) {
 		try {
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|----------------- CADASTRO DE VEÍCULOS: -----------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|-------------------- NÚMERO DA PLACA --------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		entrada.nextLine();
-		String placa = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------------- ANO DO VEÍCULO ---------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		int ano = entrada.nextInt();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------------------------- MARCA -------------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		entrada.nextLine();
-		String marca = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------------------------- MODELO ------------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		String modelo = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------------- CNH DO CONDUTOR --------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		long cnh = entrada.nextLong();
-		
-		CondutorDao condutorDao = new CondutorDao();															//TESTAR
-		Condutor condutor = condutorDao.retornaCondutor(cnh);													//TESTAR
-		
-		Veiculo veiculo = new Veiculo(placa, ano, marca, modelo, condutor);										//TESTAR
-		
-		VeiculoDao veiculoDao = new VeiculoDao();																//TESTAR
-		veiculoDao.insereVeiculo(veiculo);																		//TESTAR
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|----------------- CADASTRO DE VEÍCULOS: -----------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|-------------------- NÚMERO DA PLACA --------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			entrada.nextLine();
+			String placa = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------------- ANO DO VEÍCULO ---------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			int ano = entrada.nextInt();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------------------------- MARCA -------------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			entrada.nextLine();
+			String marca = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------------------------- MODELO ------------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			String modelo = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------------- CNH DO CONDUTOR --------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			long cnh = entrada.nextLong();
+			
+			CondutorDao condutorDao = new CondutorDao();
+			Condutor condutor = condutorDao.retornaCondutor(cnh);
+			
+			Veiculo veiculo = new Veiculo(placa, ano, marca, modelo, condutor);
+			
+			VeiculoDao veiculoDao = new VeiculoDao();
+			veiculoDao.cadastraVeiculo(veiculo);
+			
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------- DESEJA CADASTRAR UMA MULTA PARA O VEICULO? ------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|------- [1] SIM -----------------------------------------|");
+			System.out.println("|------- [2] NÃO -----------------------------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			int escolha = 0;
+			
+			try {
+				escolha = entrada.nextInt();
+			} catch (InputMismatchException e) {
+				MenuInicial.mensagemOpcaoInvalida();
+			}
+			
+			switch (escolha) {
+			case 1:
+					cadastraMulta(entrada);
+				break;
+			case 2:
+				break;
+			default:
+				MenuInicial.mensagemOpcaoInvalida();
+				break;
+			}
+			
 		} catch (InputMismatchException e) {
 			MenuInicial.mensagemDadoInformadoInvalido();
 			entrada.nextLine();
 		}
 	}
-//	String codigoMulta, float valor, int pontuacao, Veiculo veiculo
-	public static void insereMulta(Scanner entrada) {
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------------------ CADASTRO DE MULTAS: ------------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
-		System.out.println("|---------------------------------------------------------|");
-		System.out.println("|-------------------- CÓDIGO DA MULTA --------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		entrada.nextLine();
-		String codigoMulta = entrada.nextLine();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------------- VALOR DA MULTA ---------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		float valor = entrada.nextFloat();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|------------------------- MARCA -------------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		int pontuacao = entrada.nextInt();
-		System.out.println("+---------------------------------------------------------+");
-		System.out.println("|-------------------- PLACA DO VEÍCULO -------------------|");
-		System.out.println("+---------------------------------------------------------+");
-		System.out.print  ("	=> ");
-		entrada.nextLine();
-		String placa = entrada.nextLine();
+	
+	public static void cadastraMulta(Scanner entrada) {
 		
-		VeiculoDao veiculoDao = new VeiculoDao();
-		Veiculo veiculo = veiculoDao.retornaVeiculo(placa);
-		
-		Multa multa = new Multa(codigoMulta, valor, pontuacao, veiculo);
-		
-		MultaDao multaDao = new MultaDao();
-		multaDao.insereMulta(multa);
+		try {
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|------------------ CADASTRO DE MULTAS: ------------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|-------------- INFORME OS SEGUINTES DADOS: --------------|");
+			System.out.println("|---------------------------------------------------------|");
+			System.out.println("|-------------------- CÓDIGO DA MULTA --------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			entrada.nextLine();
+			String codigoMulta = entrada.nextLine();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------------- VALOR DA MULTA ---------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			float valor = entrada.nextFloat();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|----------------------- PONTUAÇÃO -----------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			int pontuacao = entrada.nextInt();
+			System.out.println("+---------------------------------------------------------+");
+			System.out.println("|-------------------- PLACA DO VEÍCULO -------------------|");
+			System.out.println("+---------------------------------------------------------+");
+			System.out.print  ("	=> ");
+			entrada.nextLine();
+			String placa = entrada.nextLine();
+			
+			VeiculoDao veiculoDao = new VeiculoDao();
+			Veiculo veiculo = veiculoDao.retornaVeiculo(placa);
+			
+			Multa multa = new Multa(codigoMulta, valor, pontuacao, veiculo);
+			
+			MultaDao multaDao = new MultaDao();
+			multaDao.cadastraMulta(multa);
+		} catch (InputMismatchException e) {
+			entrada.nextLine();
+			MenuInicial.mensagemDadoInformadoInvalido();
+		}
 	}
 	
 }

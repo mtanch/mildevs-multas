@@ -3,6 +3,9 @@ package br.com.mildevs.multa.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,6 +30,7 @@ public class Condutor {
 	private int pontuacaoCnh;
 	
 	@OneToMany(mappedBy = "condutor")
+	@Cascade(CascadeType.ALL)
 	private List<Veiculo> veiculo;
 	
 	public Condutor(long nroCnh, LocalDate dataEmissao, String orgaoEmissor, int pontuacaoCnh) {
@@ -43,7 +47,7 @@ public class Condutor {
 	public long getNroCnh() {
 		return nroCnh;
 	}
-	public void setNroCnh(int nroCnh) {
+	public void setNroCnh(long nroCnh) {
 		this.nroCnh = nroCnh;
 	}
 	public LocalDate getDataEmissao() {

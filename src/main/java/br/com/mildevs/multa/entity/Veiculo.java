@@ -2,6 +2,9 @@ package br.com.mildevs.multa.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,6 +33,7 @@ public class Veiculo {
 	private Condutor condutor;
 	
 	@Column(nullable = false)
+	@Cascade(CascadeType.ALL)
 	@OneToMany(mappedBy = "veiculo")
 	private List<Multa> multas;
 	
