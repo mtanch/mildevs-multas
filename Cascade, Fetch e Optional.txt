@@ -1,0 +1,34 @@
+O recurso CASCADE é uma anotação onde é possível fazer com que classes filhas associadas sofram alterações, updates ou exclusões realizadas na classe pai.
+	Tipos de cascade:
+
+CascadeType.ALL - toda e qualquer operação realizada na classe pai também é replicada nas classes filhas.
+
+CascadeType.PERSIST - toda alteração feita sobre a entidade pai usando Persist são replicadas nas filhas.
+
+CascadeType.REMOVE - toda remoção realizada na entidade pai também é feita nas classes filhas.
+
+CascadeType.MERGE - propaga nas entidades filhas todas as atualizações de dados realizadas na entidade pai.
+
+CascadeType.REFRESH - todas as entidades filhas serão recarregadas do banco quando houver atualizações na entidade pai.
+
+CascadeType.DETACH - realiza a operação de desanexação de todas as classes filhas associadas quando esta é feita na classe pai
+
+
+------------------------------------
+
+
+
+O recurso FETCH é uma anotação onde é possível definir se uma entidade associada será carregada do database juntamente com a principal quando ela for solicitada, ou não. 
+
+Existem dois tipos provenientes do Fetch que são o FetchType.EAGER e o FetchType.LAZY.
+
+O EAGER define que uma entidade associada será carregada toda vez do database juntamente com sua entidade principal quando ela for carregada.
+
+Do contrário, o LAZY define que uma entidade associada só será carregada caso esta seja chamada especificamente, sem estar "presa" a sua entidade superior.
+
+
+------------------------------------
+
+
+
+Optional é um facilitador que serve para permitir que um atributo seja nula, evitando assim o famoso NullPointerException. Não pode ser usado como atributo e nem como parâmetro de funcões ou nos construtores, mas pode usar ele como um retorno de um get();
